@@ -3,6 +3,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { ClientService } from '../../services/client.service';
+import { SettingsService } from '../../services/settings.service';
 import { Client } from '../../models/Client';
 
 @Component({
@@ -19,13 +20,16 @@ export class EditClientComponent implements OnInit {
     phone: '',
     balance: 0
   };
-  disableBalanceOnEdit = true ;
+
   constructor(
     private flashMessage: FlashMessagesService,
     private clientService: ClientService,
+    private settingsService: SettingsService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
+
+  disableBalanceOnEdit =  this.settingsService.getSettings().disableBalanceOnEdit;
 
   ngOnInit() {
      // get id from url
